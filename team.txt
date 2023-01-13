@@ -1,5 +1,8 @@
 <<<<<< HEAD
-Matthew Bencomo
-Angela Slinker
+=======
+Matthew I. Bencomo
 Ailen Mansilla
+Nicolas Orellana
+André Pedrosa
+Angela Slinker
 >>>>>>
