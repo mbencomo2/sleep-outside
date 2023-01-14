@@ -15,7 +15,7 @@ export function setLocalStorage(key, data) {
 }
 // add data to local storage
 export function addToLocalStorage(key, data) {
-  // if data is empty (null) start an array, otherwise get storage data
+  // if storage data is empty (null) start an array, otherwise get storage data
   let storageData = getLocalStorage(key) ?? [];
   // add data to the end of storage data
   storageData.push(data);
