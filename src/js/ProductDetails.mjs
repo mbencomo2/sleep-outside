@@ -42,7 +42,7 @@ export default class productDetails {
           srcset="${product.Image.replace("320","160")}"
         />
         <img
-          src="c"
+          src="${product.Image}"
           alt="${product.Name}"
         />
       </picture>
