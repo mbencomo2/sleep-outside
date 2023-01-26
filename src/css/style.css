@@ -130,6 +130,7 @@ button {
   padding: 0;
 }
 .product-list a {
+  display: block;
   text-decoration: none;
   color: var(--dark-grey);
 }
