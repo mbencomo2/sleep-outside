@@ -12,13 +12,15 @@ function productCardTemplate(product) {
 }
 
 export default class ProductListing {
-    constructor(category, dataSource, listElement) {
+    constructor(category, dataSource, listElement, productList) {
       this.category = category;
       this.dataSource = dataSource;
       this.listElement = listElement;
+      this.productList = productList
     }
     async init() {
-      const list = await this.dataSource.getData();
+      let list = await this.dataSource.getData();
+      list  = list.filter(item => this.productList.includes(item.Id));
       renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
     }
   }
