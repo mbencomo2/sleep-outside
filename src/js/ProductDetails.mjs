@@ -13,7 +13,7 @@ export default class productDetails {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
     document.getElementById('addToCart')
-      .addEventListener('click', this.addToCart.bind(this));
+      .addEventListener('click', this.addToCart(this.product).bind(this));
   }
 
   addToCart(product) {
