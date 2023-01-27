@@ -130,6 +130,7 @@ button {
   padding: 0;
 }
 .product-list a {
+  display: block;
   text-decoration: none;
   color: var(--dark-grey);
 }
@@ -173,6 +174,8 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .cart-card__image {
@@ -200,6 +203,15 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.cart-card__remove {
+  grid-row: 1;
+  grid-column: 3;
+  justify-self: center;
+  align-self: flex-end;
+  width: 2rem;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {
