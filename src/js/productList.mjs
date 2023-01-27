@@ -16,11 +16,11 @@ export default class ProductListing {
       this.category = category;
       this.dataSource = dataSource;
       this.listElement = listElement;
-      this.productList = productList
+      this.productList = productList;
     }
     async init() {
       let list = await this.dataSource.getData();
-      list  = list.filter(item => this.productList.includes(item.Id));
+      list = list.filter(item => this.productList.includes(item.Id));
       renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
     }
   }
