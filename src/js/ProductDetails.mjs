@@ -1,5 +1,6 @@
 import {
-  addToLocalStorage
+  addToLocalStorage,
+  swingElementById
 } from "./utils.mjs";
 
 export default class productDetails {
@@ -18,6 +19,7 @@ export default class productDetails {
 
   addToCart(product) {
     addToLocalStorage("so-cart", product);
+    swingElementById('cartIcon');
   }
 
   renderProductDetails(product) {
