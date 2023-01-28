@@ -1,6 +1,4 @@
-import {
-  addToLocalStorage
-} from "./utils.mjs";
+import { addToLocalStorage } from "./utils.mjs";
 
 export default class productDetails {
   constructor(productId, dataSource) {
@@ -12,8 +10,9 @@ export default class productDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    document.getElementById('addToCart')
-      .addEventListener('click', this.addToCart.bind(this));
+    document
+      .getElementById("addToCart")
+      .addEventListener("click", this.addToCart(this.product).bind(this));
   }
 
   addToCart(product) {
@@ -21,8 +20,8 @@ export default class productDetails {
   }
 
   renderProductDetails(product) {
-    document.pageTitle = `Sleep Outside | ${product.Name}`
-    const section = document.querySelector(".product-detail")
+    document.pageTitle = `Sleep Outside | ${product.Name}`;
+    const section = document.querySelector(".product-detail");
     section.innerHTML = `<h3>${product.Name}</h3>
 
     <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -35,11 +34,11 @@ export default class productDetails {
         />
         <source
           media="(min-width:540px)"
-          srcset="${product.Image.replace("320","240")}"
+          srcset="${product.Image.replace("320", "240")}"
         />
         <source
           media="(min-width:360px)"
-          srcset="${product.Image.replace("320","160")}"
+          srcset="${product.Image.replace("320", "160")}"
         />
         <img
           src="${product.Image}"
@@ -58,6 +57,6 @@ export default class productDetails {
 
     <div class="product-detail__add">
       <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
-    </div>`
+    </div>`;
   }
 }
