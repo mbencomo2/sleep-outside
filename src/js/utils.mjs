@@ -39,3 +39,9 @@ export function getParam(productId) {
   const product = urlParams.get('product');
   return product;
 }
+
+export function renderListWithTemplate(templateFn, listElement, list, position = "afterbegin", clear = false) {
+  const htmlStrings = list.map(templateFn);
+  if (clear) listElement.innerHTML = "";
+  listElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
