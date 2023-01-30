@@ -30,6 +30,11 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+footer {
+  font-size: var(--small-font);
+  padding: 1em;
+}
+
 .logo {
   line-height: 60px;
   width: 245px;
@@ -75,6 +80,11 @@ header {
 }
 .logo--square > div {
   margin-top: -1.7em;
+}
+.cartIcon__animate {
+  animation-name: cartIcon;
+  animation-duration: 500ms;
+  animation-timing-function: ease-out;
 }
 /* utility classes */
 .highlight {
@@ -216,7 +226,9 @@ button {
   }
 }
 
-footer {
-  font-size: var(--small-font);
-  padding: 1em;
+@keyframes cartIcon {
+  0% {transform: none;}
+  33% {transform: rotate(45deg);}
+  66% {transform: rotate(-30deg);}
+  100% {transform: none;}
 }
