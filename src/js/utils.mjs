@@ -54,25 +54,9 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
-export function swingElementById(elementId) {
+export function swingElementById(elementId, duration) {
   const element = document.querySelector(`#${elementId}`);
-  const totalTime = 500; // in milliseconds.
-  const frameDuration = 10 // in milliseconds.
-  const numberOfFrames = totalTime/frameDuration;
-  const maxAngle = 30; // max angle of rotation.
-
-  let x = 0;
-  const id = setInterval(frame, frameDuration);
-  function frame() {
-    if (x >= numberOfFrames) {
-      clearInterval(id);
-    } else {
-      x += 1;
-      // Turns element right and left only until max angle.
-      let angle = Math.round(
-        Math.sin(x * Math.PI / (numberOfFrames / 2)) * maxAngle
-      );
-      element.style.transform = `rotate(${angle}deg)`;
-    }
-  }
+  const className = `${elementId}__animate`
+  element.classList.toggle(className);
+  const timer = setTimeout(() => element.classList.toggle(className), duration);
 }
