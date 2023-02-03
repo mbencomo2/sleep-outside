@@ -167,6 +167,13 @@ button {
   width: 100%;
 }
 
+/* Cart footer */
+.cart-footer{
+  display:none;
+  text-align: center;
+  font-weight: bold;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
