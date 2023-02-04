@@ -1,6 +1,7 @@
 import {
   addToLocalStorage,
-  swingElementById
+  swingElementById,
+  updateCartNumIcon
 } from "./utils.mjs";
 
 export default class productDetails {
@@ -13,9 +14,11 @@ export default class productDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addToCart(this.product).bind(this));
+    let elem = document.getElementById("addToCart");
+    elem.addEventListener("click", function() {
+      this.addToCart(this.product);
+    }.bind(this), false);
+    elem.addEventListener("click", updateCartNumIcon);
   }
 
   addToCart(product) {

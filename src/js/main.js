@@ -1,5 +1,8 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+import { updateCartNumIcon } from "./utils.mjs";
+
+updateCartNumIcon();
 
 const topProducts = ["880RR", "985RF", "985PR", "344YJ"];
 const dataSource = new ProductData("tents");

@@ -1,4 +1,6 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartNumIcon } from "./utils.mjs";
+
+updateCartNumIcon();
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -28,6 +30,8 @@ function removeFromCart(parent) {
   setLocalStorage("so-cart", cartItems);
   //render the new cart
   renderCartContents();
+  //update cart icon number
+  updateCartNumIcon();
 }
 
 function cartItemTemplate(item) {

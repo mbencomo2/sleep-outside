@@ -76,3 +76,11 @@ export function swingElementById(elementId) {
     }
   }
 }
+
+export function updateCartNumIcon() {
+  const cartCount = getLocalStorage("so-cart").length;
+  const numElement = document.getElementById("cart-icon-number");
+
+  numElement.style.display = cartCount ? 'block' : 'none';
+  numElement.innerHTML = cartCount;
+}
