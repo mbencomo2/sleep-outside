@@ -1,10 +1,12 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import ShoppingCart from "./ShoppingCart.js";
 
-function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
-}
+const shoppingCart = new ShoppingCart(
+  "cart",
+  "so-cart",
+  document.querySelector(".product-list"),
+);
+shoppingCart.init();
 
 function removeFromCart(parent) {
   //get the current cart contents
@@ -19,29 +21,7 @@ function removeFromCart(parent) {
   //set the modified cart in localStorage
   setLocalStorage("so-cart", cartItems);
   //render the new cart
-  renderCartContents();
-}
-
-function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="../product_pages/index.html?product=${item.Id}" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="../product_pages/index.html?product=${item.Id}">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-  <span class="cart-card__remove" data-id="${item.Id}" data-function="remove" title="Remove from cart">
-  ❌
-  </span>
-</li>`;
-
-  return newItem;
+  shoppingCart.init();
 }
 
 function manageCart(e) {
@@ -53,9 +33,10 @@ function manageCart(e) {
   }
 }
 
-renderCartContents();
 //rather than create a listener for each remove button
 //instead create a handler for the whole list
 //click events will bubble through the nodes until it reaches the handler
 //we can find the clicked element using e.target
 document.querySelector(".product-list").addEventListener("click", manageCart);
+
+loadHeaderFooter();
