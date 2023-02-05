@@ -54,11 +54,32 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
+}
+
+function loadTemplate(path) {
+  return fetch(path).then((data) => data.text());
+}
+
+export async function loadHeaderFooter() {
+  const footerHtml = await loadTemplate("../partials/footer.html");
+  const headerHtml = await loadTemplate("../partials/header.html");
+  const headerElem = qs("#main-header");
+  const footerELem = qs("#main-footer");
+
+  renderWithTemplate(headerHtml, headerElem);
+  renderWithTemplate(footerHtml, footerELem);
+}
+
 export function swingElementById(elementId) {
-  const element = document.querySelector(`#${elementId}`);
+  const element = qs(`#${elementId}`);
   const totalTime = 500; // in milliseconds.
-  const frameDuration = 10 // in milliseconds.
-  const numberOfFrames = totalTime/frameDuration;
+  const frameDuration = 10; // in milliseconds.
+  const numberOfFrames = totalTime / frameDuration;
   const maxAngle = 30; // max angle of rotation.
 
   let x = 0;
@@ -70,7 +91,7 @@ export function swingElementById(elementId) {
       x += 1;
       // Turns element right and left only until max angle.
       let angle = Math.round(
-        Math.sin(x * Math.PI / (numberOfFrames / 2)) * maxAngle
+        Math.sin((x * Math.PI) / (numberOfFrames / 2)) * maxAngle
       );
       element.style.transform = `rotate(${angle}deg)`;
     }

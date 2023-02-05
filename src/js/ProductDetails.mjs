@@ -1,5 +1,7 @@
 import {
   addToLocalStorage,
+  setClick,
+  qs,
   swingElementById
 } from "./utils.mjs";
 
@@ -13,9 +15,8 @@ export default class productDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addToCart(this.product).bind(this));
+    var addItem = this.addToCart.bind(productDetails);
+    setClick("#addToCart", () => addItem(this.product));
   }
 
   addToCart(product) {
@@ -24,8 +25,8 @@ export default class productDetails {
   }
 
   renderProductDetails(product) {
-    document.pageTitle = `Sleep Outside | ${product.Name}`;
-    const section = document.querySelector(".product-detail");
+    document.title = `Sleep Outside | ${product.Name}`;
+    const section = qs(".product-detail");
     section.innerHTML = `<h3>${product.Name}</h3>
 
     <h2 class="divider">${product.NameWithoutBrand}</h2>
