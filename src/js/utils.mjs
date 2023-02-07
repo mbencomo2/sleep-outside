@@ -83,17 +83,17 @@ export function swingElementById(elementId) {
   const maxAngle = 30; // max angle of rotation.
 
   let x = 0;
-  const id = setInterval(frame, frameDuration);
-  function frame() {
+  let animate = setTimeout(function run() {
     if (x >= numberOfFrames) {
-      clearInterval(id);
+      clearTimeout(animate);
     } else {
-      x += 1;
+      x++;
       // Turns element right and left only until max angle.
       let angle = Math.round(
         Math.sin((x * Math.PI) / (numberOfFrames / 2)) * maxAngle
       );
       element.style.transform = `rotate(${angle}deg)`;
     }
-  }
+    setTimeout(run, frameDuration);
+  }, 0);
 }
