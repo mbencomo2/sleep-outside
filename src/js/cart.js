@@ -1,4 +1,4 @@
-import { loadHeaderFooter, setClick } from "./utils.mjs";
+import { loadHeaderFooter, qs } from "./utils.mjs";
 import shoppingCart from "./shoppingCart.mjs";
 
 const cart = new shoppingCart();
@@ -9,7 +9,7 @@ cart.renderCartContents();
 //instead create a handler for the whole list
 //click events will bubble through the nodes until it reaches the handler
 //we can find the clicked element using e.target
-setClick(".product-list", manageCart);
+qs(".product-list").addEventListener("click", manageCart);
 
 function manageCart(e) {
   const target = e.target;
