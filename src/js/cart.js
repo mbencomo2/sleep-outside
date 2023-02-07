@@ -12,10 +12,9 @@ cart.renderCartContents();
 setClick(".product-list", manageCart);
 
 function manageCart(e) {
-  //find the parent element for the clicked element
-  const parent = e.target.closest("li");
+  const target = e.target;
   //only call remove from cart if the clicked element has a data-function value of"remove"
-  if (e.target.dataset.function === "remove") {
-    cart.removeFromCart(parent);
+  if (target.dataset.function === "remove") {
+    cart.removeFromCart(target.dataset.id);
   }
 }
