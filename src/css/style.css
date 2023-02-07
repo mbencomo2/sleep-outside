@@ -176,6 +176,15 @@ button {
 /* Cart footer */
 .cart-footer {
   display: none;
+
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+
+  background-color: white;
+  border-top: 2px solid var(--primary-color);
+
+  padding: 0.5rem;
   text-align: center;
   font-weight: bold;
 }
