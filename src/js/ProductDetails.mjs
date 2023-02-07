@@ -15,7 +15,7 @@ export default class productDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    var addItem = this.addToCart.bind(productDetails);
+    let addItem = this.addToCart.bind(productDetails);
     setClick("#addToCart", () => addItem(this.product));
   }
 
