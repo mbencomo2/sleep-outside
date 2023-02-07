@@ -21,7 +21,7 @@ export default class productDetails {
 
   addToCart(product) {
     addToLocalStorage("so-cart", product);
-    swingElementById('cartIcon');
+    swingElementById("cartIcon");
   }
 
   renderProductDetails(product) {
