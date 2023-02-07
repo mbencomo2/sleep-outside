@@ -8,7 +8,7 @@ import {
 // shoppingCart class for handling cart actions
 export default class shoppingCart {
   renderCartContents() {
-    const cartItems = getLocalStorage("so-cart");
+    const cartItems = getLocalStorage("so-cart") ?? [];
     renderListWithTemplate(
       cartItemTemplate,
       qs(".product-list"),
@@ -16,41 +16,38 @@ export default class shoppingCart {
       "afterbegin",
       true
     );
-    // Calculate the total amount to pay for the current products in cart (if there are any)
-    let total = 0;
-    if (cartItems.length != 0) {
-      cartItems.forEach((item) => (total += item.FinalPrice));
-    }
-    // When calculated the final total, call the displayTotalCart() function
-    this.displayTotalCart(total.toFixed(2));
+    // call the displayTotalCart() function
+    this.displayTotalCart(cartItems);
   }
 
-  removeFromCart(parent) {
+  removeFromCart(itemId) {
     //get the current cart contents
     const cartItems = getLocalStorage("so-cart");
-    //childNode 11 is the span element
-    //use this so we still target the correct product
-    const action = parent.childNodes[11].dataset.id;
     //find the cart item to remove
-    const cartItem = cartItems.find((item) => item.Id === action);
+    const cartItem = cartItems.find((item) => item.Id === itemId);
     //indexOf returns the first found element's index, and splice removes it
     cartItems.splice(cartItems.indexOf(cartItem), 1);
     //set the modified cart in localStorage
     setLocalStorage("so-cart", cartItems);
     //render the new cart
-    this.renderCartContents();
+    this.renderCartContents(cartItems);
   }
 
-  displayTotalCart(total) {
-    // Display the HTML section "cart-footer" and show the total amount to pay for the items
-    qs(".cart-footer").style.display = "block";
-    let total_in_cart = qs("#total-in-cart");
-    total_in_cart.innerHTML = "Total: $" + total;
+  displayTotalCart(cart) {
+    if (cart.length > 0) {
+      // Display the HTML section "cart-footer" and show the total amount to pay for the items
+      const total = cart.reduce((sum, current) => sum + current.FinalPrice, 0);
+      qs(".cart-footer").style.display = "block";
+      const totalElem = qs("#total-in-cart");
+      totalElem.innerHTML = `Total: $${total.toFixed(2)}`;
+    } else {
+      qs(".cart-footer").style.display = "none";
+    }
   }
 }
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
+  return `<li class="cart-card divider">
     <a href="../product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img
         src="${item.Image}"
@@ -67,6 +64,4 @@ function cartItemTemplate(item) {
     Remove from cart
     </span>
   </li>`;
-
-  return newItem;
 }
