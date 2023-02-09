@@ -6,6 +6,13 @@ const productId = getParam("product");
 const dataSource = new ProductData("tents");
 
 const product = new ProductDetails(productId, dataSource);
-loadHeaderFooter();
-updateCartNumIcon();
-product.init();
+
+// we need to await loadHeaderFooter or else it will try to render 
+// the cart icon number when it doesn't exist yet
+initPage();
+
+async function initPage() {
+  await loadHeaderFooter();
+  setTimeout(updateCartNumIcon, 1000);
+  product.init();
+}
