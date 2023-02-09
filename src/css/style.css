@@ -36,6 +36,20 @@ header {
 
   background-color: white;
 }
+#cart-icon-number {
+  display: none;
+  height: 20px;
+  width: 20px;
+  background: var(--primary-color);
+  position: absolute;
+  top: 7px;
+  right: -7px;
+  font-size: var(--small-font);
+  padding: 2px;
+  border-radius: 10px;
+  color: white;
+  z-index: 1;
+}
 .logo {
   line-height: 60px;
   width: 245px;

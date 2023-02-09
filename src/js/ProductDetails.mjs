@@ -2,6 +2,7 @@ import {
   addToLocalStorage,
   setClick,
   qs,
+  updateCartNumIcon,
   swingElementById
 } from "./utils.mjs";
 
@@ -17,6 +18,7 @@ export default class productDetails {
     this.renderProductDetails(this.product);
     let addItem = this.addToCart.bind(productDetails);
     setClick("#addToCart", () => addItem(this.product));
+    setClick("#addToCart", updateCartNumIcon);
   }
 
   addToCart(product) {

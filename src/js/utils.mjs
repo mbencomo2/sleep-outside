@@ -97,3 +97,11 @@ export function swingElementById(elementId) {
     setTimeout(run, frameDuration);
   }, 0);
 }
+
+export function updateCartNumIcon() {
+  const cartCount = getLocalStorage("so-cart").length;
+  const numElement = document.getElementById("cart-icon-number");
+
+  numElement.style.display = cartCount ? 'block' : 'none';
+  numElement.innerHTML = cartCount;
+}

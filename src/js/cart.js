@@ -5,6 +5,7 @@ const cart = new shoppingCart();
 
 loadHeaderFooter();
 cart.renderCartContents();
+
 //rather than create a listener for each remove button
 //instead create a handler for the whole list
 //click events will bubble through the nodes until it reaches the handler
