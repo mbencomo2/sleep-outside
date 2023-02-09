@@ -7,4 +7,5 @@ const dataSource = new ProductData("tents");
 
 const product = new ProductDetails(productId, dataSource);
 loadHeaderFooter();
+updateCartNumIcon();
 product.init();
