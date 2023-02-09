@@ -28,15 +28,15 @@ export function addToLocalStorage(key, data) {
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
-    callback();
+    callback(event);
   });
   qs(selector).addEventListener("click", callback);
 }
 
-export function getParam(productId) {
+export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product");
+  const product = urlParams.get(param);
   return product;
 }
 
@@ -83,17 +83,17 @@ export function swingElementById(elementId) {
   const maxAngle = 30; // max angle of rotation.
 
   let x = 0;
-  const id = setInterval(frame, frameDuration);
-  function frame() {
+  let animate = setTimeout(function run() {
     if (x >= numberOfFrames) {
-      clearInterval(id);
+      clearTimeout(animate);
     } else {
-      x += 1;
+      x++;
       // Turns element right and left only until max angle.
       let angle = Math.round(
         Math.sin((x * Math.PI) / (numberOfFrames / 2)) * maxAngle
       );
       element.style.transform = `rotate(${angle}deg)`;
     }
-  }
+    setTimeout(run, frameDuration);
+  }, 0);
 }
