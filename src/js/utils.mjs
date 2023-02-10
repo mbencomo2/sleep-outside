@@ -102,6 +102,18 @@ export function updateCartNumIcon() {
   const cartCount = getLocalStorage("so-cart").length;
   const numElement = document.getElementById("cart-icon-number");
 
-  numElement.style.display = cartCount ? 'block' : 'none';
+  numElement.style.display = cartCount ? "block" : "none";
   numElement.innerHTML = cartCount;
+}
+
+export function capitalizeParam(param) {
+  // Splits the parameter into separate words.
+  let words = param.split("-");
+  let capWords = [];
+  // For each word push its capitalized version to capWords.
+  words.forEach((word) => capWords.push(word[0].toUpperCase() + word.slice(1)));
+  // Join the capWords into a sentence again.
+  let sentence = capWords.join(" ");
+
+  return sentence;
 }

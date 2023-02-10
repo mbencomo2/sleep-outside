@@ -37,18 +37,18 @@ export default class productDetails {
       <picture>
         <source
           media="(min-width:720px)"
-          srcset="${product.Image}"
+          srcset="${product.Images.PrimaryExtraLarge}"
         />
         <source
           media="(min-width:540px)"
-          srcset="${product.Image.replace("320", "240")}"
+          srcset="${product.Images.PrimaryLarge}"
         />
         <source
           media="(min-width:360px)"
-          srcset="${product.Image.replace("320", "160")}"
+          srcset="${product.Images.PrimaryMedium}"
         />
         <img
-          src="${product.Image}"
+          src="${product.Images.PrimaryLarge}"
           alt="${product.Name}"
         />
       </picture>
