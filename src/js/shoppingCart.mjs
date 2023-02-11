@@ -3,6 +3,7 @@ import {
   setLocalStorage,
   renderListWithTemplate,
   qs,
+  updateCartNumIcon,
 } from "./utils.mjs";
 
 // shoppingCart class for handling cart actions
@@ -31,6 +32,7 @@ export default class shoppingCart {
     setLocalStorage("so-cart", cartItems);
     //render the new cart
     this.renderCartContents(cartItems);
+    updateCartNumIcon();
   }
 
   displayTotalCart(cart) {
@@ -50,7 +52,7 @@ function cartItemTemplate(item) {
   return `<li class="cart-card divider">
     <a href="../product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img
-        src="${item.Image}"
+        src="${item.Images.PrimaryMedium}"
         alt="${item.Name}"
       />
     </a>
