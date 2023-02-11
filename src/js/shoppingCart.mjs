@@ -3,6 +3,7 @@ import {
   setLocalStorage,
   renderListWithTemplate,
   qs,
+  updateCartNumIcon,
 } from "./utils.mjs";
 
 // shoppingCart class for handling cart actions
@@ -31,6 +32,7 @@ export default class shoppingCart {
     setLocalStorage("so-cart", cartItems);
     //render the new cart
     this.renderCartContents(cartItems);
+    updateCartNumIcon();
   }
 
   displayTotalCart(cart) {
