@@ -102,6 +102,23 @@ export function updateCartNumIcon() {
   const cartCount = getLocalStorage("so-cart").length;
   const numElement = document.getElementById("cart-icon-number");
 
-  numElement.style.display = cartCount ? 'block' : 'none';
+  numElement.style.display = cartCount ? "block" : "none";
   numElement.innerHTML = cartCount;
+}
+
+/**
+ * Takes a string of words and returns the string with each
+ * word capitalized.
+ * @param {string} str a word or sentence to capitalize
+ * @returns a string with each word capitlized
+ */
+export function capitalize(str) {
+  // Splits the parameter into separate words.
+  let words = str.split(" ");
+  // For each word push its capitalized version to capWords.
+  words = words.map((word) => word[0].toUpperCase() + word.substring(1));
+  // Join the capWords into a sentence again.
+  let sentence = words.join(" ");
+
+  return sentence;
 }
