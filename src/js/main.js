@@ -1,3 +1,8 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, updateCartNumIcon } from "./utils.mjs";
 
-loadHeaderFooter();
+pageInit();
+
+async function pageInit() {
+  await loadHeaderFooter();
+  updateCartNumIcon();
+}

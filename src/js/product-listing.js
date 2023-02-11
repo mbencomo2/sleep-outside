@@ -4,21 +4,26 @@ import {
   qs,
   getParam,
   loadHeaderFooter,
-  capitalizeParam
+  capitalize,
+  updateCartNumIcon,
 } from "./utils.mjs";
 
-loadHeaderFooter();
+pageInit();
 
-const category = getParam("category");
-const topProducts = ["880RR", "985RF", "985PR", "344YJ"];
-const dataSource = new ProductData(category);
-const productList = new ProductList(
-  category,
-  dataSource,
-  qs(".product-list"),
-  topProducts
-);
-productList.init();
+async function pageInit() {
+  await loadHeaderFooter();
+  updateCartNumIcon();
 
-qs("#sub-title").insertAdjacentHTML("beforeend", capitalizeParam(category));
-qs("title").insertAdjacentHTML("beforeend", capitalizeParam(category));
+  const category = getParam("category");
+  const title = category.replace("-", " ");
+  const dataSource = new ProductData(category);
+  const productList = new ProductList(
+    category,
+    dataSource,
+    qs(".product-list")
+  );
+  productList.init();
+
+  qs("#sub-title").insertAdjacentHTML("beforeend", capitalize(title));
+  qs("title").insertAdjacentHTML("beforeend", capitalize(title));
+}
