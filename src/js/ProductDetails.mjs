@@ -29,6 +29,10 @@ export default class productDetails {
   renderProductDetails(product) {
     document.title = `Sleep Outside | ${product.Name}`;
     const section = qs(".product-detail");
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
     section.innerHTML = `<h3>${product.Name}</h3>
 
     <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -54,7 +58,9 @@ export default class productDetails {
       </picture>
     </div>
 
-    <p class="product-card__price">${product.ListPrice}</p>
+    <p class="product-card__price">List Price: ${formatter.format(product.ListPrice)}</p>
+    <p class="product-card__price">Final Price: ${formatter.format(product.FinalPrice)}</p>
+    <p class="product-card__price">Total Discount: ${formatter.format(product.ListPrice - product.FinalPrice)}</p>
 
     <p class="product__color">${product.Colors[0].ColorName}</p>
 
