@@ -1,29 +1,23 @@
 import {
-  addToLocalStorage,
-  setClick,
   qs,
+  setClick,
   updateCartNumIcon,
-  swingElementById
 } from "./utils.mjs";
+import shoppingCart from "./shoppingCart.mjs";
 
 export default class productDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
+    this.cart = new shoppingCart;
   }
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    let addItem = this.addToCart.bind(productDetails);
-    setClick("#addToCart", () => addItem(this.product));
+    setClick("#addToCart", () => this.cart.addToCart(this.product));
     setClick("#addToCart", updateCartNumIcon);
-  }
-
-  addToCart(product) {
-    addToLocalStorage("so-cart", product);
-    swingElementById("cartIcon");
   }
 
   renderProductDetails(product) {
