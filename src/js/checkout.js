@@ -1,4 +1,8 @@
-import { loadHeaderFooter, setClick, updateCartNumIcon } from "./utils.mjs";
+import {
+  loadHeaderFooter,
+  setClick,
+  updateCartNumIcon
+} from "./utils.mjs";
 import checkoutProcess from "./CheckoutProcess.mjs";
 
 const checkout = new checkoutProcess();

@@ -1,6 +1,10 @@
 import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
-import { getParam, loadHeaderFooter, updateCartNumIcon } from "./utils.mjs";
+import {
+  getParam,
+  loadHeaderFooter,
+  updateCartNumIcon
+} from "./utils.mjs";
 
 initPage();
 

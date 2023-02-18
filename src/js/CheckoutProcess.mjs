@@ -1,4 +1,7 @@
-import { getLocalStorage, qs } from "./utils.mjs";
+import {
+  getLocalStorage,
+  qs
+} from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 function postItemTemplate(product) {
@@ -84,11 +87,11 @@ export default class CheckoutProcess {
     const items = packageItems(cart);
     const thisDate = new Date();
     let checkoutObj = {
-      orderDate : thisDate,
+      orderDate: thisDate,
       ...JSONForm,
-      items : items,
-      orderTotal : this.orderTotal,
-      shipping : this.shipping,
+      items: items,
+      orderTotal: this.orderTotal,
+      shipping: this.shipping,
       tax: this.tax
     };
     // call the checkout method in our ExternalServices module and send it our data object.
