@@ -28,28 +28,23 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
-      <form id="checkoutForm" action="">
+      <form id="checkoutForm">
         <fieldset>
           <legend>Shipping</legend>
-          <label for="firstName">first Name <input type="text" name="fName" id="firstName" required></label>
-          <label for="lastName">last Name <input type="text" name="lname" id="lastName" required></label>
-          <label for="street">street <input type="text" name="street" id="street" required></label>
-          <label for="city">city <input type="text" name="city" id="city" required></label>
-          <label for="state">state <input type="text" name="state" id="state" required></label>
-          <label for="zip">zip <input type="text" name="zip" id="zip" required></label>
+          <label for="firstName">First Name <input type="text" name="fname" id="firstName" required></label>
+          <label for="lastName">Last Name <input type="text" name="lname" id="lastName" required></label>
+          <label for="street">Street <input type="text" name="street" id="street" required></label>
+          <label for="city">City <input type="text" name="city" id="city" required></label>
+          <label for="state">State <input type="text" name="state" id="state" required></label>
+          <label for="zip">Zip <input type="text" name="zip" id="zip" required></label>
         </fieldset>
         <fieldset>
           <legend>Payment</legend>
-          <label for="cardNumber">card Number <input type="text" name="cardNumber" id="cardNumber" required></label>
-          <label for="expiration">expiration <input type="text" name="expiration" id="expiration" required></label>
-          <label for="securityCode">security Code <input type="text" name="security" id="securityCode" required></label>
+          <label for="cardNumber">Card Number <input type="text" name="cardNumber" id="cardNumber" required></label>
+          <label for="expiration">Expiration <input type="text" name="expiration" id="expiration" required></label>
+          <label for="securityCode">Security Code <input type="text" name="security" id="securityCode" required></label>
         </fieldset>
-        <fieldset>
-          <legend>Order Summary</legend>
-          <p>Item Subtotal(<span id="totalItems"></span>) <span id="total"></span></p>
-          <p>Shipping Estimate <span id="shippingEstimate"></span></p>
-          <p>Tax <span id="tax"></span></p>
-          <p><strong>Order Total</strong>  <span id="orderTotal"></span></p>
+        <fieldset id="orderSummary">
         </fieldset>
 
         <button id="checkout" class="small" type="submit" name="submit" value="checkout">Checkout</button>

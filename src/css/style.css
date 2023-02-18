@@ -36,6 +36,26 @@ header {
 
   background-color: white;
 }
+#checkoutForm {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+fieldset {
+  max-width: 450px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+label {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+input {
+  width: 70%;
+}
+
 #cart-icon-number {
   display: none;
   height: 20px;
@@ -105,7 +125,7 @@ button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
-  margin: auto;
+  margin: 10px auto;
   display: block;
   border: 0;
   font-size: var(--large-font);

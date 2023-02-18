@@ -60,12 +60,20 @@ export default class CheckoutProcess {
     this.displayOrderTotals();
   }
   displayOrderTotals() {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+
+    const body = `
+    <legend>Order Summary</legend>
+    <label>Item Subtotal (${this.numOfItems}) <span>${formatter.format(this.itemTotal)}</span></label>
+    <label>Shipping Estimate <span>${formatter.format(this.shipping)}</span></label>
+    <label>Tax <span>${formatter.format(this.tax)}</span></label>
+    <label><strong>Order Total</strong>  <span><strong>${formatter.format(this.orderTotal)}</strong></span></label>`
+
     // once the totals are all calculated display them in the order summary page
-    qs("#totalItems").insertAdjacentHTML("afterBegin", this.numOfItems);
-    qs("#total").insertAdjacentHTML("afterBegin", this.itemTotal);
-    qs("#shippingEstimate").insertAdjacentHTML("afterBegin", this.shipping);
-    qs("#tax").insertAdjacentHTML("afterBegin", this.tax);
-    qs("#orderTotal").insertAdjacentHTML("afterBegin", this.orderTotal);
+    qs("#orderSummary").insertAdjacentHTML("afterBegin", body);
   }
 
 
@@ -74,8 +82,9 @@ export default class CheckoutProcess {
     const JSONForm = formDataToJSON(qs("#checkoutForm"));
     const cart = getLocalStorage("so-cart");
     const items = packageItems(cart);
-
-    let checkoutObj = { 
+    const thisDate = new Date();
+    let checkoutObj = {
+      orderDate : thisDate,
       ...JSONForm,
       items : items,
       orderTotal : this.orderTotal,
@@ -83,7 +92,12 @@ export default class CheckoutProcess {
       tax: this.tax
     };
     // call the checkout method in our ExternalServices module and send it our data object.
-    console.log(await this.externalServices.checkout(checkoutObj));
+    try {
+      const res = this.externalServices.checkout(checkoutObj);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
 }
