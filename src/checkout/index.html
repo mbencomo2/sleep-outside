@@ -31,23 +31,52 @@
       <form id="checkoutForm">
         <fieldset>
           <legend>Shipping</legend>
-          <label for="firstName">First Name <input type="text" name="fname" id="firstName" required></label>
-          <label for="lastName">Last Name <input type="text" name="lname" id="lastName" required></label>
-          <label for="street">Street <input type="text" name="street" id="street" required></label>
-          <label for="city">City <input type="text" name="city" id="city" required></label>
-          <label for="state">State <input type="text" name="state" id="state" required></label>
-          <label for="zip">Zip <input type="text" name="zip" id="zip" required></label>
+          <label class="top" for="firstName"
+            >First Name <input type="text" name="fname" id="firstName" required
+          /></label>
+          <label class="top" for="lastName"
+            >Last Name <input type="text" name="lname" id="lastName" required
+          /></label>
+          <label class="top" for="street"
+            >Street <input type="text" name="street" id="street" required
+          /></label>
+          <label class="top" for="city"
+            >City <input type="text" name="city" id="city" required
+          /></label>
+          <label class="top" for="state"
+            >State <input type="text" name="state" id="state" required
+          /></label>
+          <label class="top" for="zip"
+            >Zip <input type="text" name="zip" id="zip" required
+          /></label>
         </fieldset>
         <fieldset>
           <legend>Payment</legend>
-          <label for="cardNumber">Card Number <input type="text" name="cardNumber" id="cardNumber" required></label>
-          <label for="expiration">Expiration <input type="text" name="expiration" id="expiration" required></label>
-          <label for="securityCode">Security Code <input type="text" name="security" id="securityCode" required></label>
+          <label class="top" for="cardNumber"
+            >Card Number
+            <input type="text" name="cardNumber" id="cardNumber" required
+          /></label>
+          <label class="top" for="expiration"
+            >Expiration
+            <input type="text" name="expiration" id="expiration" required
+          /></label>
+          <label class="top" for="securityCode"
+            >Security Code
+            <input type="text" name="security" id="securityCode" required
+          /></label>
         </fieldset>
         <fieldset id="orderSummary">
+          <legend>Order Summary</legend>
         </fieldset>
+        <p id="success-message">
+          Your Order has been recieved! Expect shipping details soon.
+        </p>
+        <p id="failure-message">
+          An error occured placing your order, make sure you filled in all the
+          fields.
+        </p>
 
-        <button id="checkout" class="small" type="submit" name="submit" value="checkout">Checkout</button>
+        <button id="checkout">Checkout</button>
       </form>
     </main>
 
