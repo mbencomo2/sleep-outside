@@ -19,5 +19,8 @@ async function pageInit() {
   checkout.init();
 
   // Listener for submit button
-  setClick("#checkout", () => checkout.checkout(qs("form")));
+  setClick("#checkout", (e) => {
+    e.preventDefault();
+    checkout.checkout(qs("form"))
+  });
 }
