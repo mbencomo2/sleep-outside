@@ -125,10 +125,10 @@ function cartItemTemplate(item) {
     <p class="cart-card__price">$${(item.FinalPrice * item.Quantity).toFixed(
       2
     )}</p>
-    <span class="cart-card__remove" data-id="${
+    <button class="cart-card__remove" data-id="${
       item.Id
     }" data-function="remove" title="Remove from cart">
-    Remove from cart
-    </span>
+    &times;
+    </button>
   </li>`;
 }
