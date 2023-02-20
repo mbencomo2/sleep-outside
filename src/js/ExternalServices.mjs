@@ -23,6 +23,11 @@ export default class ExternalServices {
     const data = await convertToJson(response);
     return data.Result;
   }
+  /**
+   * Send an order to the server for processing
+   * @param {object} payload The order data
+   * @returns a bool signifying the request was successful
+   */
   async checkout(payload) {
     const options = {
       method: "POST",
@@ -31,7 +36,7 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload)
     }
-    let resolution = await fetch(baseURL + "checkout", options);
-    return resolution;
+    let res = await fetch(baseURL + "checkout", options);
+    return res.ok;  
   }
 }
