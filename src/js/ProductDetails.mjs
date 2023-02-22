@@ -47,7 +47,7 @@ export default class productDetails {
  * @returns An html formatted string to insert into the page
  */
 function productTemplate(product) {
-  const extraImages = product.Images.ExtraImages;
+  const extraImages = product.Images.ExtraImages ?? [];
   const slideTemplate = (image, i) =>
     `<div class="slides fade"><img src="${image.Src}" alt="${image.Title}"></div>`;
   const dotTemplate = (image, i) =>
@@ -70,7 +70,7 @@ const htmlTemplate = (item) => (slides) => (dots) =>
   <div class="divider">
     <!-- Slideshow container -->
     <div class="carousel-container">
-        <!-- Full-width images with number and caption text -->
+        <!-- Full-width images -->
         <div class="slides fade">
             <img src="${item.Images.PrimaryExtraLarge}" alt="${item.Name}"/>
         </div>
