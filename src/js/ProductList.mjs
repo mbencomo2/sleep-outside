@@ -1,6 +1,10 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   return `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
       <img
@@ -9,8 +13,10 @@ function productCardTemplate(product) {
       />
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
-      <p class="product-card__price">${product.ListPrice}</p></a
-    >
+      <p class="product-card__price">List Price: ${formatter.format(product.ListPrice)}</p>
+      <p class="product-card__price">Final Price: ${formatter.format(product.FinalPrice)}</p>
+      <p class="product-card__price">Total Discount: ${formatter.format(product.ListPrice - product.FinalPrice)}</p>
+    </a>
   </li>`;
 }
 
