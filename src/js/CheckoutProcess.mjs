@@ -97,8 +97,14 @@ export default class CheckoutProcess {
         tax: this.tax,
       };
 
-    // call the checkout method in our ExternalServices module and send it our data object.
-    const response = await this.externalServices.checkout(checkoutObj);
+    let response;
+
+    try {
+      // call the checkout method in our ExternalServices module and send it our data object.
+      response = await this.externalServices.checkout(checkoutObj);
+    } catch(err) {
+      console.log(err.message);
+    }
 
     // Let the user know their order was placed successfully
     if (response) {

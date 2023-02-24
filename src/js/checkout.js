@@ -19,8 +19,12 @@ async function pageInit() {
   checkout.init();
 
   // Listener for submit button
-  setClick("#checkout", (e) => {
+  qs("#checkout").addEventListener("click", (e) => {
     e.preventDefault();
-    checkout.checkout(qs("form"));
+    var myForm = document.forms[0];
+    var chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if(chk_status) 
+      checkout.checkout();
   });
 }
