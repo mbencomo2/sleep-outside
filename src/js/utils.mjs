@@ -132,7 +132,7 @@ export function currencyFormatter(value) {
 }
 
 /**
- * Creates an alert list item with a custom message.
+ * Creates an alert with a custom message.
  * @param {string} message A message to include in the alert
  * @param {bool} scroll True: scroll to the top left of the page
  * @returns An HTML formatted string for an alert list item
