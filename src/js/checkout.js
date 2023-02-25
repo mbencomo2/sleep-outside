@@ -1,4 +1,4 @@
-import { qs, loadHeaderFooter, setClick, updateCartNumIcon } from "./utils.mjs";
+import { qs, loadHeaderFooter, updateCartNumIcon } from "./utils.mjs";
 import checkoutProcess from "./CheckoutProcess.mjs";
 
 const summary = qs("#order-summary"),
@@ -24,7 +24,14 @@ async function pageInit() {
     var myForm = document.forms[0];
     var chk_status = myForm.checkValidity();
     myForm.reportValidity();
-    if(chk_status) 
-      checkout.checkout();
+    if (chk_status) {
+      checkout.checkout(myForm);
+    }
+  });
+
+  qs("main").addEventListener("click", (e) => {
+    if (e.target.className == "close-icon") {
+      e.target.closest("p").remove();
+    }
   });
 }
