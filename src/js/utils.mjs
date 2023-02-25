@@ -130,3 +130,15 @@ export function currencyFormatter(value) {
   });
   return currency.format(value);
 }
+
+/**
+ * Creates an alert list item with a custom message.
+ * @param {string} message A message to include in the alert
+ * @param {bool} scroll True: scroll to the top left of the page
+ * @returns An HTML formatted string for an alert list item
+ */
+export function alertMessage(message, scroll = true) {
+  let p = `<p class="alert">${message}<span class="close-icon">X</span></p>`;
+  if (scroll) window.scrollTo(0, 0);
+  qs("main").insertAdjacentHTML("afterBegin", p);
+}
