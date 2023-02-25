@@ -3,6 +3,7 @@ import {
   setClick,
   updateCartNumIcon,
   currencyFormatter,
+  alertMessage,
 } from "./utils.mjs";
 import shoppingCart from "./shoppingCart.mjs";
 
@@ -26,7 +27,10 @@ export default class productDetails {
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product);
-    setClick("#addToCart", () => this.cart.addToCart(this.product));
+    setClick("#addToCart", () => {
+      this.cart.addToCart(this.product);
+      alertMessage(`${this.product.Name} added to cart.`, false);
+    });
     setClick("#addToCart", updateCartNumIcon);
   }
 
@@ -81,7 +85,9 @@ const htmlTemplate = (item) => (slides) => (dots) =>
         <br>
         <!-- The dots/circles -->
         <div style="text-align:center">
-          <span class="dot" data-index="0" data-action="change"></span>${dots.join("")}
+          <span class="dot" data-index="0" data-action="change"></span>${dots.join(
+            ""
+          )}
         </div>
       </div>
       <!-- Slideshow code modified from https://www.w3schools.com/howto/howto_js_slideshow.asp -->
@@ -101,4 +107,3 @@ const htmlTemplate = (item) => (slides) => (dots) =>
   <div class="product-detail__add"><button id="addToCart" data-id="${
     item.Id
   }">Add to Cart</button></div>`;
-
