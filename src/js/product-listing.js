@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import {
   qs,
@@ -16,7 +16,7 @@ async function pageInit() {
 
   const category = getParam("category");
   const title = category.replace("-", " ");
-  const dataSource = new ProductData(category);
+  const dataSource = new ExternalServices(category);
   const productList = new ProductList(
     category,
     dataSource,

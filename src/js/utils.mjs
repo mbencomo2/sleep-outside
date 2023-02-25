@@ -122,3 +122,11 @@ export function capitalize(str) {
 
   return sentence;
 }
+
+export function currencyFormatter(value) {
+  let currency = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  return currency.format(value);
+}
