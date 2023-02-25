@@ -11,7 +11,6 @@ function convertToJson(res) {
 export default class ExternalServices {
   constructor(category) {
     this.category = category;
-    this.path = `../json/${this.category}.json`;
   }
   async getData(category) {
     const response = await fetch(baseURL + `products/search/${category}`);
@@ -26,17 +25,16 @@ export default class ExternalServices {
   /**
    * Send an order to the server for processing
    * @param {object} payload The order data
-   * @returns a bool signifying the request was successful
+   * @returns promise: for error handling and reponse data
    */
   async checkout(payload) {
     const options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload)
-    }
-    let res = await fetch(baseURL + "checkout", options);
-    return res.ok;  
+      body: JSON.stringify(payload),
+    };
+    return await fetch(baseURL + "checkout", options);
   }
 }
