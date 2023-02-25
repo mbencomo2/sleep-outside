@@ -357,6 +357,23 @@ select {
   }
 }
 
+/* Alert Styles */
+.alert {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  background-color: #f0a968;
+  border: 1px solid #ff8d00;
+}
+
+.alert span {
+  padding: 0.5rem;
+}
+
 /* Footer Styles */
 footer {
   font-size: var(--small-font);
