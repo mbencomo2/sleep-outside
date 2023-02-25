@@ -29,7 +29,7 @@ export default class shoppingCart {
       item = cart.find((carItem) => carItem.Id == product.Id);
 
     if (item) {
-      item.Quantity += 1;
+      ++item.Quantity;
       setLocalStorage("so-cart", cart);
     } else {
       addToLocalStorage("so-cart", newProduct);
@@ -60,11 +60,15 @@ export default class shoppingCart {
   changeQuantity(itemId, amount = 1) {
     const cart = getLocalStorage("so-cart"),
       cartItem = cart.find((item) => item.Id == itemId);
-    cartItem.Quantity = amount;
+    cartItem.Quantity = +amount;
     setLocalStorage("so-cart", cart);
     this.renderCartContents();
   }
 
+  /**
+   * Displays the total value of the cart in #total-in-cart
+   * @param {array} cart The current cart
+   */
   displayTotalCart(cart) {
     if (cart.length > 0) {
       // Display the HTML section "cart-footer" and show the total amount to pay for the items
@@ -79,13 +83,27 @@ export default class shoppingCart {
       qs(".cart-footer").style.display = "none";
     }
   }
+
+  clearCart() {
+    setLocalStorage("so-cart", []);
+    updateCartNumIcon();
+  }
 }
 
+/**
+ * Creates each line item in the cart.
+ * @param {object} item An item from the cart
+ * @returns an HTML formatted string
+ */
 function cartItemTemplate(item) {
   //figure out which option should be selected by default
-  let selected = [];
-  for (let i = 0; i <= 10; i++)
-    i + 1 === item.Quantity ? selected.push("selected") : selected.push("");
+  let options = [],
+    option = (num, select) =>
+      `<option value="${num}" ${select}>${num}</option>`;
+  for (let i = 0; i < 9; i++)
+    i + 1 == item.Quantity
+      ? options.push(option(i + 1, "selected"))
+      : options.push(option(i + 1, ""));
 
   return `<li class="cart-card divider">
     <a href="../product_pages/index.html?product=${
@@ -107,16 +125,8 @@ function cartItemTemplate(item) {
         <option value="${item.Quantity}" selected disabled hidden>${
     item.Quantity
   }</option>
-        <option value="1" ${selected[0]}>1</option>
-        <option value="2" ${selected[1]}>2</option>
-        <option value="3" ${selected[2]}>3</option>
-        <option value="4" ${selected[3]}>4</option>
-        <option value="5" ${selected[4]}>5</option>
-        <option value="6" ${selected[5]}>6</option>
-        <option value="7" ${selected[6]}>7</option>
-        <option value="8" ${selected[7]}>8</option>
-        <option value="9" ${selected[8]}>9</option>
-        <option value="10+" ${selected[9]}>10+</option>
+        ${options.join("").trim()}
+        <option value="10+">10+</option>
       </select>
       <input type="number" id="quantity-plus-${item.Id}" data-id="${
     item.Id

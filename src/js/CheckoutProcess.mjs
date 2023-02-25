@@ -1,4 +1,4 @@
-import { getLocalStorage, qs } from "./utils.mjs";
+import { alertMessage, getLocalStorage, qs } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 export default class CheckoutProcess {
@@ -26,7 +26,7 @@ export default class CheckoutProcess {
     this.calculateItemSummary();
     this.calculateOrdertotal();
     // display the totals.
-    this.displayOrderTotals()
+    this.displayOrderTotals();
   }
 
   /**
@@ -97,27 +97,30 @@ export default class CheckoutProcess {
         tax: this.tax,
       };
 
-    let response;
-
-    try {
+    //Only checkout if the cart has items in it
+    if (items.length > 0) {
       // call the checkout method in our ExternalServices module and send it our data object.
-      response = await this.externalServices.checkout(checkoutObj);
-    } catch(err) {
-      console.log(err.message);
-    }
-
-    // Let the user know their order was placed successfully
-    if (response) {
-      qs("#success-message").style.display = "block";
+      let res = await this.externalServices.checkout(checkoutObj);
+      // Let the user know their order was placed successfully
+      if (res.ok) {
+        // direct the browser to the success page for further processing
+        window.location.href = "/checkout/success.html";
+      } else {
+        // indicate something went wrong with alerts
+        let alerts = await res.json();
+        for (const message in alerts) {
+          alertMessage(`${alerts[message]}`);
+        }
+      }
     } else {
-      qs("#failure-message").style.display = "block";
+      alertMessage("Your cart is empty");
     }
   }
 }
 
 /**
  * Template that generates each line item in the order
- * @param {product} product The product to format
+ * @param {object} product The product to format
  * @returns a product entry to include in the order
  */
 function postItemTemplate(product) {
