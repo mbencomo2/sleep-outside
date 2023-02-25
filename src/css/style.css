@@ -392,6 +392,10 @@ footer {
   input {
     width: 70%;
   }
+  .alert {
+    width: 60%;
+    margin: 0.5rem auto;
+  }
   .mission {
     font-size: 1.2em;
   }
