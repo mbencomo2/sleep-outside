@@ -10,10 +10,10 @@ async function initPage() {
   const dataSource = new ExternalServices("tents");
   const product = new ProductDetails(productId, dataSource);
   let carousel = new ImageCarousel();
-  
+
   await loadHeaderFooter();
   updateCartNumIcon();
-  
+
   await product.init();
   carousel.showSlides();
 

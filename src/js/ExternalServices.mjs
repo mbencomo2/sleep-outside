@@ -1,10 +1,11 @@
 const baseURL = "https://wdd330-backend.onrender.com/";
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    throw { name: "servicesError", message: jsonResponse };
   }
 }
 
@@ -28,7 +29,7 @@ export default class ExternalServices {
    * @param {object} payload The order data
    * @returns a bool signifying the request was successful
    */
-  async checkout(payload) {
+  async checkoutB(payload) {
     const options = {
       method: "POST",
       headers: {
@@ -36,7 +37,6 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload)
     }
-    let res = await fetch(baseURL + "checkout", options);
-    return res.ok;  
+    return await fetch(baseURL + "checkout", options).then(convertToJson);
   }
 }

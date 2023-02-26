@@ -24,7 +24,7 @@ async function pageInit() {
     var myForm = document.forms[0];
     var chk_status = myForm.checkValidity();
     myForm.reportValidity();
-    if(chk_status) 
-      checkout.checkout();
+    if(chk_status)
+      checkout.checkout(myForm);
   });
 }
