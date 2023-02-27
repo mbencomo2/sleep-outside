@@ -24,6 +24,7 @@ body {
 }
 img {
   max-width: 100%;
+  height: auto;
 }
 header {
   display: flex;
@@ -33,6 +34,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1;
+  min-height: 4rem;
 
   background-color: white;
 }
@@ -66,6 +68,21 @@ label {
   font-size: 30px;
   text-align: right;
   font-family: var(--font-headline);
+}
+.alert {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5rem;
+  margin: 0.2rem 0.5rem;
+  background-color: #f0a968;
+  border: 1px solid #ff8d00;
+}
+.alert span {
+  width: 40px;
+  height: 100%;
 }
 .logo img {
   width: 60px;
@@ -245,7 +262,7 @@ button {
   flex-direction: column;
 }
 .cart-card__quantity input,
-select {
+.cart-card__quantity select {
   width: 3.5rem;
 }
 .cart-card__price {
@@ -259,13 +276,13 @@ select {
   justify-self: flex-start;
   align-self: flex-start;
 
-  margin: 0.1rem;
-  padding: 0.1rem;
+  margin: 0;
+  padding: 0.5rem;
 
-  background-color: red;
-  color: white;
+  background-color: transparent;
+  color: red;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 
   cursor: pointer;
 }
@@ -279,11 +296,6 @@ select {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-}
-#success-message,
-#failure-message {
-  display: none;
-  text-align: center;
 }
 .top {
   display: flex;
@@ -361,6 +373,7 @@ select {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+  min-height: 2.8rem;
 }
 
 @media screen and (min-width: 500px) {

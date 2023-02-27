@@ -1,4 +1,10 @@
-import { getLocalStorage, qs } from "./utils.mjs";
+import {
+  alertMessage,
+  getLocalStorage,
+  setLocalStorage,
+  removeAllAlerts,
+  qs
+} from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 export default class CheckoutProcess {
@@ -80,10 +86,6 @@ export default class CheckoutProcess {
    * @param {object} formElem The form being submitted
    */
   async checkout(formElem) {
-    // Hide the order messages
-    qs("#success-message").style.display = "none";
-    qs("#failure-message").style.display = "none";
-
     // build the data object from the calculated fields, the items in the cart, and the information entered into the form
     let JSONForm = formDataToJSON(formElem),
       cart = getLocalStorage("so-cart"),
@@ -97,14 +99,16 @@ export default class CheckoutProcess {
         tax: this.tax,
       };
 
-    // call the checkout method in our ExternalServices module and send it our data object.
-    const response = await this.externalServices.checkout(checkoutObj);
-
-    // Let the user know their order was placed successfully
-    if (response) {
-      qs("#success-message").style.display = "block";
-    } else {
-      qs("#failure-message").style.display = "block";
+    try {
+      // call the checkout method in our ExternalServices module and send it our data object.
+      await this.externalServices.checkoutB(checkoutObj);
+      setLocalStorage("so-cart", []);
+      window.location.href = "./success.html";
+    } catch (err) {
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
     }
   }
 }
