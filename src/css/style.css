@@ -192,22 +192,28 @@ button {
 .product-card p {
   margin: 0.5em 0;
 }
-
+.product-card__view {
+  display: block;
+  padding: 0.8rem;
+  margin: 0.5rem;
+  background-color: var(--secondary-color);
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
 .card__brand {
   font-size: var(--small-font);
 }
-
 .card__name {
   font-size: 1em;
 }
-/* End product list card */
 
+/* End product list card */
 .product-detail {
   padding: 1em;
   max-width: 500px;
   margin: auto;
 }
-
 .product-detail img {
   width: 100%;
 }
@@ -322,7 +328,6 @@ button {
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
-  user-select: none;
 }
 .next {
   right: 0;
@@ -331,13 +336,6 @@ button {
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
-}
-.numbertext {
-  color: black;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
 }
 .my-slides {
   display: none;
@@ -369,6 +367,42 @@ button {
   }
 }
 
+/* Quick View Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  padding: 2.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.close-modal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 18pt;
+  cursor: pointer;
+}
+.modal-content {
+  height: 100%;
+  overflow-y: scroll;
+  background-color: white;
+  animation: zoom 0.5s ease-out 0s 1;
+}
+@keyframes zoom {
+  from {
+    transform: scale(0.1, 0.1);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+
 /* Footer Styles */
 footer {
   font-size: var(--small-font);
@@ -376,7 +410,7 @@ footer {
   min-height: 2.8rem;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 680px) {
   body {
     max-width: 1080px;
     margin: auto;
@@ -394,5 +428,11 @@ footer {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+  .modal {
+    padding: 4rem 20%;
+  }
+  .close-modal {
+    right: 20%;
   }
 }

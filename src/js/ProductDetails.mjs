@@ -46,11 +46,12 @@ export default class productDetails {
 }
 
 /**
- *
- * @param {product} product The product to display
+ * Create the product details html
+ * @param {*} product The product to display
  * @returns An html formatted string to insert into the page
  */
-function productTemplate(product) {
+export function productTemplate(product) {
+  // This function is also used in productList.js for rendering the quick view modal
   const extraImages = product.Images.ExtraImages ?? [];
   const slideTemplate = (image, i) =>
     `<div class="slides fade"><img src="${image.Src}" alt="${image.Title}"></div>`;
