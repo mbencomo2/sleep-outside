@@ -5,11 +5,13 @@ export default class ImageCarousel {
    */
   constructor() {
     this.slideIndex = 1;
+    document
+      .querySelector(".carousel-container")
+      .addEventListener("click", (e) => this.carouselMan(e));
   }
 
   /**
    * Display the slide of given index.
-   * @param {string} index The index of a slide in the carousel
    */
   showSlides() {
     // Slideshow code modified from https://www.w3schools.com/howto/howto_js_slideshow.asp
@@ -30,8 +32,27 @@ export default class ImageCarousel {
     slides[this.slideIndex - 1].style.display = "block";
     dots[this.slideIndex - 1].className += " active";
   }
-  
+
   setIndex(index) {
     this.slideIndex = index;
+  }
+
+  carouselMan(e) {
+    let action = e.target.dataset.action;
+    let index = +e.target.dataset.index;
+    switch (action) {
+      case "slide":
+        this.slideIndex += index;
+        this.showSlides();
+        break;
+
+      case "change":
+        this.slideIndex = index + 1;
+        this.showSlides();
+        break;
+
+      default:
+        break;
+    }
   }
 }

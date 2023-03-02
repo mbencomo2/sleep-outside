@@ -1,3 +1,5 @@
+import ImageCarousel from "./ImageCarousel.mjs";
+import { productTemplate } from "./ProductDetails.mjs";
 import { renderListWithTemplate, currencyFormatter } from "./utils.mjs";
 
 function productCardTemplate(product) {
@@ -19,6 +21,7 @@ function productCardTemplate(product) {
         product.ListPrice - product.FinalPrice
       )}</p>
     </a>
+    <span class="product-card__view" data-id=${product.Id}>View</span>
   </li>`;
 }
 
@@ -39,5 +42,28 @@ export default class ProductListing {
       "afterBegin",
       true
     );
+
+    document
+      .querySelectorAll(".product-card__view")
+      .forEach((elem) =>
+        elem.addEventListener("click", (e) => this.displayModal(e))
+      );
+  }
+  // TODO: Create a method that inserts HTML into a modal for each product listing
+  async displayModal(e) {
+    let id = e.target.dataset.id;
+    let product = await this.dataSource.findProductById(id);
+    let modal = document.querySelector(".modal");
+    let modalContent = document.querySelector(".product-detail");
+    let html = productTemplate(product);
+    modalContent.insertAdjacentHTML("beforeend", html);
+    modal.style.display = "block";
+    document.querySelector(".close-modal").addEventListener("click", () => {
+      modal.style.display = "none";
+      modalContent.innerHTML = "";
+    });
+    let carousel = new ImageCarousel();
+    carousel.showSlides();
+    document.querySelector("#addToCart").remove();
   }
 }
