@@ -47,7 +47,7 @@ export function addToLocalStorage(key, data) {
 /**
  * set a listener for both touchend and click
  * @param {string} selector
- * @param {function} callback
+ * @param {callback} callback
  */
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -71,8 +71,8 @@ export function getParam(param) {
 
 /**
  * Render a list with a callback template into a given element.
- * @param {function} templateFn
- * @param {DOM Object} parentElement The element to insert the rendered list into
+ * @param {callback} templateFn
+ * @param {*} parentElement The element to insert the rendered list into
  * @param {array} list An array of objects to process
  * @param {string} position Optional, where to insert the list
  * @param {bool} clear Optional, whether to clear the element before insertion
@@ -217,4 +217,21 @@ export function removeAllAlerts() {
   for (let i = 0; i < elements.length; i++) {
     elements[i].remove();
   }
+}
+
+/**
+ * Collects the form data from the page and converts it
+ * into a JSON compatible object.
+ * @param {object} formElement The form to collect data from
+ * @returns a JSON-like object containing the form data
+ */
+export function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
 }
