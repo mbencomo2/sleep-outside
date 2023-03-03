@@ -29,14 +29,33 @@ export default class ExternalServices {
    * @param {object} payload The order data
    * @returns a bool signifying the request was successful
    */
-  async checkoutB(payload) {
+  async checkout(payload) {
     const options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload)
-    }
+      body: JSON.stringify(payload),
+    };
     return await fetch(baseURL + "checkout", options).then(convertToJson);
+  }
+  async loginRequests(creds) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(creds),
+    };
+    return await fetch(baseURL + "login", options).then(convertToJson);
+  }
+  async getOrders(token) {
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return await fetch(baseURL + "orders", options).then(convertToJson);
   }
 }

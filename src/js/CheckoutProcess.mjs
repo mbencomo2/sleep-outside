@@ -3,7 +3,8 @@ import {
   getLocalStorage,
   setLocalStorage,
   removeAllAlerts,
-  qs
+  qs,
+  formDataToJSON,
 } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
@@ -32,7 +33,7 @@ export default class CheckoutProcess {
     this.calculateItemSummary();
     this.calculateOrdertotal();
     // display the totals.
-    this.displayOrderTotals()
+    this.displayOrderTotals();
   }
 
   /**
@@ -101,7 +102,7 @@ export default class CheckoutProcess {
 
     try {
       // call the checkout method in our ExternalServices module and send it our data object.
-      await this.externalServices.checkoutB(checkoutObj);
+      await this.externalServices.checkout(checkoutObj);
       setLocalStorage("so-cart", []);
       window.location.href = "./success.html";
     } catch (err) {
@@ -136,21 +137,4 @@ function postItemTemplate(product) {
 function packageItems(items) {
   // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
   return items.map(postItemTemplate);
-}
-
-/**
- * Collects the form data from the page and converts it
- * into a JSON compatible object.
- * @param {object} formElement The form to collect data from
- * @returns a JSON-like object containing the form data
- */
-function formDataToJSON(formElement) {
-  const formData = new FormData(formElement),
-    convertedJSON = {};
-
-  formData.forEach(function (value, key) {
-    convertedJSON[key] = value;
-  });
-
-  return convertedJSON;
 }
